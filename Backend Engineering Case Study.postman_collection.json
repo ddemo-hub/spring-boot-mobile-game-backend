@@ -1,0 +1,618 @@
+{
+	"info": {
+		"_postman_id": "6a75747b-89b3-4cdf-b7f8-8014cfb8137e",
+		"name": "Backend Engineering Case Study",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "25307417"
+	},
+	"item": [
+		{
+			"name": "Create User and Update Level",
+			"item": [
+				{
+					"name": "Create New User",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.collectionVariables.set(\r",
+									"    'newUserID', pm.response.json().userID\r",
+									")\r",
+									"\r",
+									"pm.collectionVariables.set(\r",
+									"    'newUserToken', pm.response.json().authToken\r",
+									")"
+								],
+								"type": "text/javascript",
+								"packages": {}
+							}
+						}
+					],
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"username\": \"Dream\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:8080/api/v1/user",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"api",
+								"v1",
+								"user"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Update New User Level",
+					"request": {
+						"method": "PUT",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:8080/api/v1/user",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"api",
+								"v1",
+								"user"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Enter Tournament",
+			"item": [
+				{
+					"name": "As the New User",
+					"item": [
+						{
+							"name": "Enter Queue as New User",
+							"request": {
+								"method": "POST",
+								"header": [
+									{
+										"key": "Authorization",
+										"value": "Bearer {{newUserToken}}",
+										"type": "text"
+									}
+								],
+								"url": {
+									"raw": "http://localhost:8080/api/v1/tournament/enter",
+									"protocol": "http",
+									"host": [
+										"localhost"
+									],
+									"port": "8080",
+									"path": [
+										"api",
+										"v1",
+										"tournament",
+										"enter"
+									]
+								}
+							},
+							"response": []
+						}
+					],
+					"description": "If the user is not at least level 20, the request will be refused."
+				},
+				{
+					"name": "With Unclaimed Reward",
+					"item": [
+						{
+							"name": "User with Unclaimed Reward",
+							"request": {
+								"method": "POST",
+								"header": [],
+								"url": {
+									"raw": "http://localhost:8080/api/v1/tournament/enter",
+									"protocol": "http",
+									"host": [
+										"localhost"
+									],
+									"port": "8080",
+									"path": [
+										"api",
+										"v1",
+										"tournament",
+										"enter"
+									]
+								}
+							},
+							"response": []
+						}
+					],
+					"description": "Mock user with an unclaimed reward of 10000 coins and ID  \nb9e58c2d-9db6-4882-8953-539e3b9ba179"
+				},
+				{
+					"name": "Using Mock Users",
+					"item": [
+						{
+							"name": "Mock User 1 (Turkey)",
+							"request": {
+								"method": "POST",
+								"header": [
+									{
+										"key": "Authorization",
+										"value": "Bearer ",
+										"type": "text"
+									}
+								],
+								"url": {
+									"raw": "http://localhost:8080/api/v1/tournament/enter",
+									"protocol": "http",
+									"host": [
+										"localhost"
+									],
+									"port": "8080",
+									"path": [
+										"api",
+										"v1",
+										"tournament",
+										"enter"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Mock User 2 (Germany)",
+							"request": {
+								"method": "POST",
+								"header": [
+									{
+										"key": "Authorization",
+										"value": "Bearer ",
+										"type": "text"
+									}
+								],
+								"url": {
+									"raw": "http://localhost:8080/api/v1/tournament/enter",
+									"protocol": "http",
+									"host": [
+										"localhost"
+									],
+									"port": "8080",
+									"path": [
+										"api",
+										"v1",
+										"tournament",
+										"enter"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Mock User 3 (France)",
+							"request": {
+								"method": "POST",
+								"header": [
+									{
+										"key": "Authorization",
+										"value": "Bearer ",
+										"type": "text"
+									}
+								],
+								"url": {
+									"raw": "http://localhost:8080/api/v1/tournament/enter",
+									"protocol": "http",
+									"host": [
+										"localhost"
+									],
+									"port": "8080",
+									"path": [
+										"api",
+										"v1",
+										"tournament",
+										"enter"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Mock User 4 (US)",
+							"request": {
+								"method": "POST",
+								"header": [
+									{
+										"key": "Authorization",
+										"value": "Bearer ",
+										"type": "text"
+									}
+								],
+								"url": {
+									"raw": "http://localhost:8080/api/v1/tournament/enter",
+									"protocol": "http",
+									"host": [
+										"localhost"
+									],
+									"port": "8080",
+									"path": [
+										"api",
+										"v1",
+										"tournament",
+										"enter"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Mock User 5 (UK) Copy",
+							"request": {
+								"method": "POST",
+								"header": [
+									{
+										"key": "Authorization",
+										"value": "Bearer ",
+										"type": "text"
+									}
+								],
+								"url": {
+									"raw": "http://localhost:8080/api/v1/tournament/enter",
+									"protocol": "http",
+									"host": [
+										"localhost"
+									],
+									"port": "8080",
+									"path": [
+										"api",
+										"v1",
+										"tournament",
+										"enter"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Mock User 6 (Turkey)",
+							"request": {
+								"method": "POST",
+								"header": [
+									{
+										"key": "Authorization",
+										"value": "Bearer ",
+										"type": "text"
+									}
+								],
+								"url": {
+									"raw": "http://localhost:8080/api/v1/tournament/enter",
+									"protocol": "http",
+									"host": [
+										"localhost"
+									],
+									"port": "8080",
+									"path": [
+										"api",
+										"v1",
+										"tournament",
+										"enter"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Mock User 7 (Germany)",
+							"request": {
+								"method": "POST",
+								"header": [
+									{
+										"key": "Authorization",
+										"value": "Bearer ",
+										"type": "text"
+									}
+								],
+								"url": {
+									"raw": "http://localhost:8080/api/v1/tournament/enter",
+									"protocol": "http",
+									"host": [
+										"localhost"
+									],
+									"port": "8080",
+									"path": [
+										"api",
+										"v1",
+										"tournament",
+										"enter"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Mock User 8 (France)",
+							"request": {
+								"method": "POST",
+								"header": [
+									{
+										"key": "Authorization",
+										"value": "Bearer ",
+										"type": "text"
+									}
+								],
+								"url": {
+									"raw": "http://localhost:8080/api/v1/tournament/enter",
+									"protocol": "http",
+									"host": [
+										"localhost"
+									],
+									"port": "8080",
+									"path": [
+										"api",
+										"v1",
+										"tournament",
+										"enter"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Mock User 9 (US)",
+							"request": {
+								"method": "POST",
+								"header": [
+									{
+										"key": "Authorization",
+										"value": "Bearer ",
+										"type": "text"
+									}
+								],
+								"url": {
+									"raw": "http://localhost:8080/api/v1/tournament/enter",
+									"protocol": "http",
+									"host": [
+										"localhost"
+									],
+									"port": "8080",
+									"path": [
+										"api",
+										"v1",
+										"tournament",
+										"enter"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Mock User 10 (UK)",
+							"request": {
+								"method": "POST",
+								"header": [
+									{
+										"key": "Authorization",
+										"value": "Bearer ",
+										"type": "text"
+									}
+								],
+								"url": {
+									"raw": "http://localhost:8080/api/v1/tournament/enter",
+									"protocol": "http",
+									"host": [
+										"localhost"
+									],
+									"port": "8080",
+									"path": [
+										"api",
+										"v1",
+										"tournament",
+										"enter"
+									]
+								}
+							},
+							"response": []
+						}
+					],
+					"description": "Request tournament entry through mock users.\n\nYou may send the requests in different orders to test the group formation logic"
+				}
+			]
+		},
+		{
+			"name": "Claim Reward",
+			"item": [
+				{
+					"name": "Claim Reward",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiJ7XCJ1c2VySURcIjpcImI5ZTU4YzJkLTlkYjYtNDg4Mi04OTUzLTUzOWUzYjliYTE3OVwiLFwidXNlcm5hbWVcIjpcIkVtaXJrYW5cIixcImNvdW50cnlcIjpcIlR1cmtleVwifSJ9.3voNEYpdbKUkHu-qOIqHZUWPOSS_KO7kMDVMd4dt7bo",
+								"type": "text"
+							}
+						],
+						"url": {
+							"raw": "http://localhost:8080/api/v1/user/claim-reward",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"api",
+								"v1",
+								"user",
+								"claim-reward"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "As New User",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiJ7XCJ1c2VySURcIjpcImI5ZTU4YzJkLTlkYjYtNDg4Mi04OTUzLTUzOWUzYjliYTE3OVwiLFwidXNlcm5hbWVcIjpcIkVtaXJrYW5cIixcImNvdW50cnlcIjpcIlR1cmtleVwifSJ9.3voNEYpdbKUkHu-qOIqHZUWPOSS_KO7kMDVMd4dt7bo",
+								"type": "text"
+							}
+						],
+						"url": {
+							"raw": "http://localhost:8080/api/v1/user/claim-reward",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"api",
+								"v1",
+								"user",
+								"claim-reward"
+							]
+						}
+					},
+					"response": []
+				}
+			],
+			"description": "Claim the rewards of the mock user with an unclaimed reward of 10000 coins and ID of  \nb9e58c2d-9db6-4882-8953-539e3b9ba179"
+		},
+		{
+			"name": "Get Group Rank",
+			"item": [
+				{
+					"name": "Get Group Rank",
+					"request": {
+						"method": "GET",
+						"header": []
+					},
+					"response": []
+				},
+				{
+					"name": "New User's Rank",
+					"event": [
+						{
+							"listen": "prerequest",
+							"script": {
+								"exec": [
+									"// Get today's date in UTC\r",
+									"var today = new Date();\r",
+									"\r",
+									"// Format the date to yyyy-MM-dd\r",
+									"var year = today.getUTCFullYear();\r",
+									"var month = String(today.getUTCMonth() + 1).padStart(2, '0');\r",
+									"var day = String(today.getUTCDate()).padStart(2, '0');\r",
+									"\r",
+									"var formattedDate = `${year}-${month}-${day}`;\r",
+									"\r",
+									"// Set the formatted date as a collection variable\r",
+									"pm.collectionVariables.set(\"date_today\", formattedDate);"
+								],
+								"type": "text/javascript",
+								"packages": {}
+							}
+						}
+					],
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "Bearer {{newUserToken}}",
+								"type": "text"
+							}
+						],
+						"url": {
+							"raw": "http://localhost:8080/api/v1/user/{{newUserID}}/tournament/rank?date={{date_today}}",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"api",
+								"v1",
+								"user",
+								"{{newUserID}}",
+								"tournament",
+								"rank"
+							],
+							"query": [
+								{
+									"key": "date",
+									"value": "{{date_today}}"
+								}
+							]
+						}
+					},
+					"response": []
+				}
+			],
+			"description": "Get the group rank of a a mock user who were the third-place user in a tournament held in 06.06.2024"
+		},
+		{
+			"name": "Get Group Leaderboard",
+			"item": [
+				{
+					"name": "of New User",
+					"request": {
+						"method": "GET",
+						"header": []
+					},
+					"response": []
+				}
+			],
+			"description": "Get the group learderboard for the new user or any user"
+		},
+		{
+			"name": "Get Country Leaderboard",
+			"item": [
+				{
+					"name": "using New User",
+					"request": {
+						"method": "GET",
+						"header": []
+					},
+					"response": []
+				}
+			],
+			"description": "Get the country learderboard for the new user or any user"
+		}
+	],
+	"variable": [
+		{
+			"key": "newUserInfo",
+			"value": ""
+		},
+		{
+			"key": "newUserID",
+			"value": ""
+		},
+		{
+			"key": "newUserToken",
+			"value": ""
+		},
+		{
+			"key": "date_today",
+			"value": ""
+		}
+	]
+}

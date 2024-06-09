@@ -1,0 +1,59 @@
+version: '3.9'
+
+services:
+  app:
+    image: backend-engineering-case-study:1.0
+    container_name: backend-engineering-case-study
+    build:
+      context: .
+      dockerfile: Dockerfile
+    ports:
+      - '8080:8080'
+    networks:
+      - 'local-network'
+    environment:
+      - spring.datasource.url=jdbc:mysql://${MYSQL_CONTAINER_NAME}:3306/${MYSQL_DB}
+      - spring.datasource.username=${MYSQL_USER}
+      - spring.datasource.password=${MYSQL_PASSWORD}
+      - spring.data.redis.host=${REDIS_CONTAINER_NAME}
+      - spring.data.redis.port=6379
+      - security.secretkey=${SECRET_KEY}
+    depends_on:
+      mysqldb:
+        condition: service_healthy  # Wait for mysql to get completely ready
+
+  mysqldb:
+    image: mysql:8.0.28-oracle
+    container_name: ${MYSQL_CONTAINER_NAME}
+    restart: always
+    environment:
+      MYSQL_DATABASE: ${MYSQL_DB}
+      MYSQL_USER: ${MYSQL_USER}
+      MYSQL_PASSWORD: ${MYSQL_PASSWORD}
+      MYSQL_ROOT_PASSWORD: ${MYSQL_PASSWORD}
+    networks:
+      - 'local-network'
+    ports:
+      - '3305:3306'
+    volumes:
+      - case-mysql-data:/var/lib/case-mysqldb
+      - ./${MYSQL_ENTRYPOINT_INIT}:/docker-entrypoint-initdb.d/${MYSQL_ENTRYPOINT_INIT}:ro
+    healthcheck:  # Make sure mysql is completely ready
+      test: mysqladmin ping -h 127.0.0.1 -u $$MYSQL_USER --password=$$MYSQL_PASSWORD
+      interval: 5s
+
+  redis:
+    image: redis:7.2.5
+    container_name: ${REDIS_CONTAINER_NAME}
+    restart: always
+    networks:
+      - 'local-network'
+    ports:
+     - "6378:6379"
+
+volumes:
+  case-mysql-data:
+
+networks:
+  local-network:
+    driver: bridge
